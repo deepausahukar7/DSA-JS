@@ -1,0 +1,33 @@
+function symmetricOrNot(n, mat) {
+   let ans="YES";
+   let i=0;
+   let j=n-1;
+    while(i<j){
+       if(+mat[i]!=mat[j]){
+           ans="NO";
+       }
+       i++;
+       j--;
+   }
+   let k=0;
+   let l=n-1;
+    while(k<l){
+       let num="";
+       let num2="";
+        for(let i=0;i<n;i++){
+           num+=mat[i][k];
+       }
+       
+       for(let i=0;i<n;i++){
+           num2+=mat[i][l];
+       }
+       
+       if(+num!=+num2){
+           ans="NO";
+       }
+       
+       k++;
+       l--;
+   }
+   console.log(ans);
+}

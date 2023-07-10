@@ -1,0 +1,54 @@
+function maxPosterArea(n, polls) {
+  let maxArea = 0;
+  let left = 0;
+  let right = n - 1;
+
+  while (left < right) {
+    const width = right - left;
+    const height = Math.min(polls[left], polls[right]);
+    const area = width * height;
+    
+    if (area > maxArea) {
+      maxArea = area;
+    }
+    
+    if (polls[left] < polls[right]) {
+      left++;
+    } else {
+      right--;
+    }
+  }
+
+  return maxArea;
+}
+function runProgram(input){
+   // Write Code Here
+  input = input.trim().split("\n");
+  let t = +input[0];
+  let line=1;
+  while(t--!=0){
+      let n = input[line++];
+      let polls = input[line++].trim().split(" ").map(Number);
+      console.log(maxPosterArea(n, polls));
+  }
+}
+if (process.env.USERNAME === "") {
+     runProgram(``);
+ } else {
+     process.stdin.resume();
+     process.stdin.setEncoding("ascii");
+     let read = "";
+     process.stdin.on("data", function (input) {
+         read += input;
+     });
+     process.stdin.on("end", function () {
+         read = read.replace(/\n$/, "");
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+     });
+     process.on("SIGINT", function () {
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+         process.exit(0);
+     });
+ }

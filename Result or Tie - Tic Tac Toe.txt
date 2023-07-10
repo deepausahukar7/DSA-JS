@@ -1,0 +1,66 @@
+function ticTacToe(board){
+function checkRow(board, c) {
+  for (let i = 0; i < 3; i++) {
+    let count = 0;
+    for (let j = 0; j < 3; j++) {
+      if (board[i][j] === c) {
+        count++;
+      }
+    }
+    if (count === 3) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function checkCol(board, c) {
+  for (let i = 0; i < 3; i++) {
+    let count = 0;
+    for (let j = 0; j < 3; j++) {
+      if (board[j][i] === c) {
+        count++;
+      }
+    }
+    if (count === 3) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function checkDiagonal(board, c) {
+  let count = 0;
+  for (let i = 0; i < 3; i++) {
+    if (board[i][i] === c) {
+      count++;
+    }
+  }
+  if (count === 3) {
+    return true;
+  }
+
+  count = 0;
+  for (let i = 0; i < 3; i++) {
+    if (board[i][2 - i] === c) {
+      count++;
+    }
+  }
+  if (count === 3) {
+    return true;
+  }
+
+  return false;
+}
+
+if (checkRow(board, 'x') || checkCol(board, 'x') || checkDiagonal(board, 'x')) {
+  console.log('x');
+} else if (checkRow(board, 'o') || checkCol(board, 'o') || checkDiagonal(board, 'o')) {
+  console.log('o');
+} else {
+  console.log('Tie');
+}
+
+  
+}
+

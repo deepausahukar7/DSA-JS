@@ -1,0 +1,82 @@
+function rotate(N,mat){
+let top=0;
+let bot=N-1;
+let left=0;
+let right=N-1;
+let count=0;
+ if(N%2===0){
+     end=N*N;
+ }
+ else{
+     end=N*N-1;
+ }
+        while(count<end){
+    let pre= mat[top+1][left];
+    for(i=left;i<=right&&count<end;i++){
+        let cur=mat[top][i];
+        mat[top][i]=pre;
+        pre=cur;
+        count++;
+    }
+    top++;
+    for(i=top;i<=bot&&count<end;i++){
+        let cur=mat[i][right];
+        mat[i][right]=pre;
+        pre=cur;
+        count++;
+    }
+    right--;
+    for(i=right;i>=left&&count<end;i--){
+        let cur=mat[bot][i];
+        mat[bot][i]=pre;
+        pre=cur;
+        count++;
+    }
+    bot--;
+    for(let i=bot;i>=top&&count<end;i--){
+        let cur=mat[i][left];
+        mat[i][left]=pre;
+        pre=cur;
+        count++;
+    }
+    left++;
+} 
+ for(let i=0;i<N;i++){
+     let bag="";
+     for(let j=0;j<N;j++){
+         bag+=mat[i][j]+" ";
+     }
+     console.log(bag);
+}
+}
+function runProgram(input) {
+input=input.trim().split("\n");
+let N=+input[0];
+let arr=[];
+let line=1;
+for(let i=0;i<N;i++){
+    arr.push(input[line++].trim().split(" ").map(Number));
+}
+rotate(N,arr);
+}
+
+if (process.env.USER === "") {
+  runProgram(``);
+} else {
+  process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+    read += input;
+  });
+  process.stdin.on("end", function () {
+    read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}
