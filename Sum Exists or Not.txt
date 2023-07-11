@@ -1,0 +1,48 @@
+function runProgram(input) {
+    input=input.trim().split("\n");
+    let n=+input[0];
+    let arr=input[1].trim().split(" ").map(Number);
+    let k=+input[2];
+    
+    //  console.log(sumExists(n,arr,k));
+    
+    if((sumExists(n,arr,k))) console.log("yes");
+    
+    else console.log("no");
+    
+    
+}
+
+function sumExists(n,arr,k){
+    if(k==0) return true;
+    
+    if(n==0) return false;
+    
+    if(arr[n-1]<=k){
+        return sumExists(n-1,arr,k-arr[n-1]) || sumExists(n-1,arr,k);
+    }
+    else{
+        return sumExists(n-1,arr,k);
+    }
+}
+
+if (process.env.USER === "") {
+  runProgram(``);
+} else {
+  process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+    read += input;
+  });
+  process.stdin.on("end", function () {
+    read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

@@ -1,0 +1,67 @@
+function bishopAttack(n,m,mat){
+   let max = -Infinity;
+   let g,h;
+   for(let i=0; i<n; i++){
+       for(let j=0; j<m; j++){
+           let x = sum(i,j,mat,n,m);
+           if(max<x){
+               max = x;
+               g=i;
+               h=j;
+           }
+       }
+   }
+   console.log(max); 
+}
+
+ function sum(i,j,mat,n,m){
+     let sum=0;
+     for(let x=i,y=j; x>=0 && y>=0; x-- && y--){
+         sum += mat[x][y];
+     }
+     for(let x=i+1,y=j+1; x<n && y<m; x++ && y++){
+         sum += mat[x][y];
+     }
+     for(let x=i-1,y=j+1; x>=0 && y<m; x-- && y++){
+         sum += mat[x][y];
+     }
+     for(let x=i+1,y=j-1; x<n && y>=0; x++ && y--){
+         sum += mat[x][y];
+     }
+     return sum;
+ }
+function runProgram(input){
+   // Write Code Here
+  input = input.trim().split("\n");
+  let t = +input[0];
+  let line=1;
+  while(t--!==0){
+      let [n,m] = input[line++].trim().split(" ").map(Number);
+      let mat=[];
+      for(let i=0; i<n; i++){
+          mat.push( input[line++].trim().split(" ").map(Number));
+      }
+    //   console.log(n,m,mat)
+      bishopAttack(n,m,mat);
+  }
+}
+if (process.env.USERNAME === "") {
+     runProgram(``);
+ } else {
+     process.stdin.resume();
+     process.stdin.setEncoding("ascii");
+     let read = "";
+     process.stdin.on("data", function (input) {
+         read += input;
+     });
+     process.stdin.on("end", function () {
+         read = read.replace(/\n$/, "");
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+     });
+     process.on("SIGINT", function () {
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+         process.exit(0);
+     });
+ }

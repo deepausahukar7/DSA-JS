@@ -1,0 +1,81 @@
+var count = 0;
+function runProgram(input) {
+  // Write Code Here
+  let matrix = [];
+  N = +input;
+  for (let i = 0; i < N; i++) {
+    let z = [];
+    for (let j = 0; j < N; j++) {
+      z.push(0);
+    }
+    matrix.push(z);
+  }
+
+  Nqueen(matrix, 0); //function call
+  console.log(count);
+}
+if (process.env.USERNAME === "") {
+  runProgram(``);
+} else {
+  process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+    read += input;
+  });
+  process.stdin.on("end", function () {
+    read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}
+
+function print(arr) {
+  // Print Function
+  for (let i = 0; i < arr.length; i++) {
+    //  console.log(arr[i].join(" "));
+  }
+}
+
+function Nqueen(matrix, row) {
+  if (row == matrix.length) {
+    print(matrix);
+    count++;
+    return;
+  }
+  for (let i = 0; i < matrix.length; i++) {
+    if (checkSafe(matrix, row, i) === true) {
+      matrix[row][i] = 1;
+      Nqueen(matrix, row + 1);
+      matrix[row][i] = 0;
+    }
+  }
+}
+
+function checkSafe(matrix, row, col) {
+  // upward
+  for (let i = row; i >= 0; i--) {
+    if (matrix[i][col] == 1) {
+      return false;
+    }
+  }
+  // left upward
+
+  for (let i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
+    if (matrix[i][j] == 1) {
+      return false;
+    }
+  }
+  //right upward
+  for (let i = row - 1, j = col + 1; i >= 0 && j < matrix.length; i--, j++) {
+    if (matrix[i][j] == 1) {
+      return false;
+    }
+  }
+  return true;
+}
