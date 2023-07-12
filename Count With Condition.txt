@@ -1,0 +1,43 @@
+function count(n,x,arr){
+   let ans = new Array(x + 1).fill(0);
+  ans[0] = 1;
+
+  for (let i = 0; i < n; i++) {
+    for (let j = x; j >= arr[i]; j--) {
+      ans[j] += ans[j - arr[i]];
+    }
+  }
+
+  return ans[x]; 
+    
+}
+function runProgram(input){
+   // Write Code Here
+  input = input.trim().split("\n");
+ 
+  let line=0;
+   let[n,x] = input[line++].trim().split(" ").map(Number);
+  let arr = input[line++].trim().split(" ").map(Number);
+//   console.log(n,x,arr);
+console.log(count(n,x,arr));
+}
+if (process.env.USERNAME === "") {
+     runProgram(``);
+ } else {
+     process.stdin.resume();
+     process.stdin.setEncoding("ascii");
+     let read = "";
+     process.stdin.on("data", function (input) {
+         read += input;
+     });
+     process.stdin.on("end", function () {
+         read = read.replace(/\n$/, "");
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+     });
+     process.on("SIGINT", function () {
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+         process.exit(0);
+     });
+ }

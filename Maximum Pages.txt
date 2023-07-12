@@ -1,0 +1,53 @@
+function maximumPages(n,x,cost,page){
+    
+    let dp = new Array(n+1).fill(null).map(() => new Array(x+1).fill(0));
+    for(let i=0; i<= x; i++){
+        dp[0][i] = 0;
+    }
+    for(let j=0; j<= n; j++){
+        dp[j][0] = 0;
+        
+    }
+    
+    for(let i=1; i<=x; i++){
+        for(let j=1; j<=n; j++){
+            if(cost[j-1]>i){
+                dp[j][i] = dp[j-1][i];
+            }
+            else{
+                dp[j][i] = Math.max(dp[j-1][i],page[j-1]+dp[j-1][i-cost[j-1]]);
+            }
+        }
+    }
+    return dp[n][x];
+}
+
+function runProgram(input){
+   // Write Code Here
+  input = input.trim().split("\n");
+  let[n,x]=input[0].trim().split(" ").map(Number);
+  let cost=input[1].trim().split(" ").map(Number);
+  let page=input[2].trim().split(" ").map(Number);
+  console.log(maximumPages(n,x,cost,page));
+  
+}
+if (process.env.USERNAME === "") {
+     runProgram(``);
+ } else {
+     process.stdin.resume();
+     process.stdin.setEncoding("ascii");
+     let read = "";
+     process.stdin.on("data", function (input) {
+         read += input;
+     });
+     process.stdin.on("end", function () {
+         read = read.replace(/\n$/, "");
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+     });
+     process.on("SIGINT", function () {
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+         process.exit(0);
+     });
+ }
