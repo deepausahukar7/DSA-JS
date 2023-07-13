@@ -1,0 +1,49 @@
+function split(n,arr){
+    let count=0;
+    let sum1=0;
+    let sum2=0;
+    for(let i=0; i<n; i++){
+       sum2+=arr[i];
+    }
+   for(let i=0; i<n-1; i++){
+       sum1+=arr[i];
+       sum2-=arr[i];
+       if(sum1>=sum2){
+           count++;
+       }
+       
+   }
+  console.log(count);
+}
+function runProgram(input){
+   // Write Code Here
+  input = input.trim().split("\n");
+  let tc = +input[0];
+  let line=1;
+  for(let i=0; i<tc; i++){
+      
+  let n = +input[line++];
+  let arr = input[line++].trim().split(" ").map(Number);
+  split(n,arr);
+  }
+}
+if (process.env.USERNAME === "") {
+     runProgram(``);
+ } else {
+     process.stdin.resume();
+     process.stdin.setEncoding("ascii");
+     let read = "";
+     process.stdin.on("data", function (input) {
+         read += input;
+     });
+     process.stdin.on("end", function () {
+         read = read.replace(/\n$/, "");
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+     });
+     process.on("SIGINT", function () {
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+         process.exit(0);
+     });
+ }

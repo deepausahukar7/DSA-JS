@@ -1,0 +1,116 @@
+function runProgram(input) {
+   input=input.trim().split("\n");
+   let n=+input[0];
+   let line=1;
+   let arr=[];
+   for(let i=0;i<n;i++){
+     arr.push(input[line++].split(" "));  
+   }
+   masaiCodingCompetition(arr);
+}
+
+function masaiCodingCompetition(arr){
+   let q1=[];
+   let q2=[];
+   let q3=[];
+   let q4=[];
+   let flag1=false;
+   let flag2=false;
+   let flag3=false;
+   let flag4=false;
+   let master=[];
+   for(let i=0;i<arr.length;i++){
+       if(arr[i][0]=='E'){
+           switch(Number(arr[i][1])){
+           case 1:
+               if(flag1==false){
+                   master.push(Number(arr[i][1]));
+                   flag1=true;
+               }
+               q1.push(arr[i][2]);
+               break;
+           case 2:
+               if(flag2==false){
+                   master.push(Number(arr[i][1]));
+                   flag2=true;
+               }
+               q2.push(arr[i][2]);
+               break;
+           case 3:
+               if(flag3==false){
+                   master.push(Number(arr[i][1]));
+                   flag3=true;
+               }
+               q3.push(arr[i][2]);
+               break;
+           case 4:
+               if(flag4==false){
+                   master.push(Number(arr[i][1]));
+                   flag4=true;
+               }
+               q4.push(arr[i][2]);
+               break;
+           }
+       }
+      else if(arr[i][0]=='D'){
+        //   master.reverse();
+          switch(master[0]){
+              case 1:
+            let x1=q1.shift();
+                  console.log(master[0]+" "+x1);
+                  if(q1.length==0){
+                      master.shift();
+                      flag1=false;
+                  }
+                  break;
+              case 2:
+            let x2=q2.shift();
+                  console.log(master[0]+" "+x2);
+                  if(q2.length==0){
+                      master.shift();
+                      flag2=false;
+                  }
+                  break;
+              case 3:
+            let x3=q3.shift();
+                  console.log(master[0]+" "+x3);
+                  if(q3.length==0){
+                      master.shift();
+                      flag3=false;
+                  }
+                  break;
+              case 4:
+            let x4=q4.shift();
+                  console.log(master[0]+" "+x4);
+                  if(q4.length==0){
+                      master.shift();
+                      flag4=false;
+                  }
+                  break;
+          }
+      }
+   }
+//   console.log(master)
+}
+
+
+if (process.env.USER === "") {
+  runProgram(``);
+} else {
+  process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+    read += input;
+  });
+  process.stdin.on("end", function () {
+    read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

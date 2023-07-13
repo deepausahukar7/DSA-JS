@@ -1,0 +1,31 @@
+function twoArrayAndPhrase(n, m, matrix){
+    let count=0;
+    let r=matrix;
+    for(let i=0;i<n;i++){
+    for(let j=0;j<m;j++){
+    if(i<n-3){
+    sum= r[i][j]+r[i+1][j]+r[i+2][j]+r[i+3][j];
+    if(sum=="saba")
+      count++;
+    }
+    if(j<m-3){
+    sum= r[i][j]+r[i][j+1]+r[i][j+2]+r[i][j+3];
+    if(sum=="saba")
+      count++;
+    }
+    if(i<n-3 && j<m-3){
+    sum= r[i][j]+r[i+1][j+1]+r[i+2][j+2]+r[i+3][j+3];
+    if(sum=="saba")
+      count++;
+    }
+    if(i>=3 && j<m-3){
+    sum= r[i][j]+r[i-1][j+1]+r[i-2][j+2]+r[i-3][j+3];
+    if(sum=="saba")
+      count++;
+        }
+        
+    }
+} 
+console.log(count);
+}
+

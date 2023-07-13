@@ -1,0 +1,52 @@
+function runProgram(input){
+   // Write Code Here
+  input = input.trim().split("\n");
+  let line=1;
+  let n = +input[0];
+  let arr = input[line++].trim().split(" ").map(Number);
+  let q = input[line++];
+  let query = input[line++].trim().split(" ").map(Number);
+ queries(n,arr,q,query);
+  
+}
+function queries(n,arr,q,query){
+     let obj ={};
+   
+    for(let i=0; i<arr.length; i++){
+        if(obj[arr[i]]===undefined){
+            obj[arr[i]]=1;
+        }
+        else{
+            obj[arr[i]]++;
+        }
+    }
+    for(let j=0; j<q; j++){
+        if(obj[query[j]]){
+            console.log("YES");
+        }
+        else{
+            console.log("NO");
+        }
+    }
+    
+}
+if (process.env.USERNAME === "") {
+     runProgram(``);
+ } else {
+     process.stdin.resume();
+     process.stdin.setEncoding("ascii");
+     let read = "";
+     process.stdin.on("data", function (input) {
+         read += input;
+     });
+     process.stdin.on("end", function () {
+         read = read.replace(/\n$/, "");
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+     });
+     process.on("SIGINT", function () {
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+         process.exit(0);
+     });
+ }
