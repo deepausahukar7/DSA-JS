@@ -1,0 +1,58 @@
+function runProgram(input) {
+   input=input.trim().split("\n");
+   let tc=+input[0];
+   let line=1;
+   for(let i=0;i<tc;i++){
+       let n=+input[line++];
+       let str=input[line++];
+       balance(n,str);
+   }
+}
+
+function balance(n,str){
+    let obj={a:"A",b:"B",c:"C",d:"D",e:"E",f:"F",g:"G",h:"H",i:"I",j:"J",k:"K",l:"L",m:"M",n:"N",o:"O",p:"P",q:"Q",r:"R",s:"S",t:"T",u:"U",v:"V",w:"W",x:"X",y:"Y",z:"Z"};
+    let keys=Object.keys(obj);
+    let values=Object.values(obj);
+    let s=[];
+    for(let i=0;i<n;i++){
+        if(keys.includes(str[i])){
+            s.push(str[i]);
+        }
+        else if(values.includes(str[i])){
+          
+            
+                for(let x in obj){
+                    if(x===s[s.length-1] && obj[x]===str[i]){
+                        s.pop();
+                    }
+                }
+        }
+    }
+    if(s.length===0){
+        console.log("True");
+    }
+    else{
+        console.log("False");
+    }
+}
+
+if (process.env.USER === "") {
+  runProgram(``);
+} else {
+  process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+    read += input;
+  });
+  process.stdin.on("end", function () {
+    read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}
