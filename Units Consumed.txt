@@ -1,0 +1,13 @@
+function unitsConsumed(n) {
+    //write code here
+      let N = n-80;
+    
+    if(N<=150){
+        console.log(N/3);
+    } else if(N<=650){
+        console.log(50+(N-150)/5);
+    } else if(N>650){
+        console.log(150+(N-650)/10);
+    }
+     
+}

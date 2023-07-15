@@ -1,0 +1,76 @@
+//Enter code here
+function runProgram(input){
+   
+    input=input.trim().split("\n");
+    
+    let tc=+input [0];
+    let line1=1;
+    for(let j=0;j<tc;j++){
+    let n=+input [line1++];
+    let x=+input [line1++];
+    let y=+input [line1++];
+    let arr1=[];
+    let arr2=[];
+    
+    for (let i=0;i<n; i++){
+    let l=input[line1++].trim().split(" ").map(Number);
+    arr1.push(l[0]);
+    arr2.push (l[1]);
+    }
+    stack(n,x,y,arr1,arr2);
+    }
+    }
+
+function stack(n,x, y,arr1,arr2) {
+   arr1.sort((a,b)=>{
+       return a-b;
+   });
+   arr2.sort((a,b)=>{
+       return a-b;
+   });
+   let temp=0;
+   let i=0;
+   let xsum=0;
+   let ysum=0;
+   while(i<n){
+       if(arr1[i]==arr2[i]){
+           i++;
+           continue;
+       }
+       else if(arr1[i]>arr2[i]){
+         temp = arr1[i]-arr2[i];  
+       }
+       else if(arr1[i]<arr2[i]){
+         temp = arr1[i]-arr2[i];  
+       }
+       i++;
+       if(temp<0){
+           xsum+=Math.abs(temp*x);
+       }
+       else {
+           ysum+=(temp*y);
+       }
+   }
+   console.log(xsum+ysum);
+}
+
+if (process.env.USERNAME === "") {
+     runProgram(``);
+ } else {
+     process.stdin.resume();
+     process.stdin.setEncoding("ascii");
+     let read = "";
+     process.stdin.on("data", function (input) {
+         read += input;
+     });
+     process.stdin.on("end", function () {
+         read = read.replace(/\n$/, "");
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+     });
+     process.on("SIGINT", function () {
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+         process.exit(0);
+     });
+ }

@@ -1,0 +1,50 @@
+function runProgram(input){
+   // Write Code Here
+  input = input.trim().split("\n");
+  let t=+input[0];
+  let line=1;
+  while(t--!==0){
+      let num=+input[line++];
+      console.log(Happy(num));
+  }
+}
+function Happy(num){
+    let arr=[];
+    while(true){
+        if(num==1) return "Yes";
+        else if(arr.includes(num)===true) return "No";
+        arr.push(num);
+        
+        num=fun(num);
+    }
+}
+function fun(n){
+    let str = n.toString();
+    let arr = str.split(" ");
+    let newNum=0;
+    for(let i=0; i<str.length; i++){
+        newNum += parseInt(str[i])**2;
+        
+    }
+    return newNum;
+}
+if (process.env.USERNAME === "") {
+     runProgram(``);
+ } else {
+     process.stdin.resume();
+     process.stdin.setEncoding("ascii");
+     let read = "";
+     process.stdin.on("data", function (input) {
+         read += input;
+     });
+     process.stdin.on("end", function () {
+         read = read.replace(/\n$/, "");
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+     });
+     process.on("SIGINT", function () {
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+         process.exit(0);
+     });
+ }

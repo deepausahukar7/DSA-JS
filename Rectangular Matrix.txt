@@ -1,0 +1,47 @@
+function runProgram(input){
+   input=input.trim().split("\n");
+  
+   let line=0;
+  
+       let mat=[];
+       
+       let [n,m]=input[line++].trim().split(" ").map(Number);
+       
+       for(let i=0;i<n;i++){
+           mat.push(input[line++].trim().split(" ").map(Number));
+       }
+       matrix(n,m,mat);
+    // console.log(mat);
+       
+   }
+
+
+function matrix(n,m,mat){
+    for(let i=0;i<n;i++){
+        let bag="";
+        for(let j=0;j<m;j++){
+            bag+=mat[i][j]+1+" ";
+        }
+        console.log(bag);
+    }
+}
+if (process.env.USERNAME === "") {
+     runProgram(``);
+ } else {
+     process.stdin.resume();
+     process.stdin.setEncoding("ascii");
+     let read = "";
+     process.stdin.on("data", function (input) {
+         read += input;
+     });
+     process.stdin.on("end", function () {
+         read = read.replace(/\n$/, "");
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+     });
+     process.on("SIGINT", function () {
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+         process.exit(0);
+     });
+ }
