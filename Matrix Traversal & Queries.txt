@@ -1,0 +1,40 @@
+
+function masaiTraversalAndQueries(N, M, q, arr){
+ let bag1="";
+ let bag2="";
+ let s=0;
+ let e=N*M;
+if(q==1){
+    for(let i=0;i<N;i++){
+        if(i%2===0){
+            for(let j=0;j<M ;j++){
+                bag1+=arr[i][j]+" ";
+            }
+            }
+         else{
+             for(let j=M-1;j>=0;j--){
+                 bag1+=arr[i][j]+" ";
+             }
+         }
+          
+        }
+        console.log(bag1);
+    }
+    
+if(q==2){
+    for(let i=0;i<N;i++){
+        if(i%2!==0){
+            for(let j=0;j<M;j++){
+                bag2+=arr[i][j]+" ";
+            }
+            }
+         else{
+             for(let j=M-1;j>=0;j--){
+                 bag2+=arr[i][j]+" ";
+             }
+         }
+        }
+        console.log(bag2);
+        
+    }
+}
