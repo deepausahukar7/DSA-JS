@@ -1,0 +1,40 @@
+function noddy(n,x,arr){
+    let count=0;
+    let skip=0;
+    for(let i=0; i<n; i++){
+        if(skip==2) break;
+        else if(arr[i]<=x) count++;
+        else skip++;
+    }
+    console.log(count);
+}
+
+function runProgram(input){
+   // Write Code Here
+  input = input.trim().split("\n");
+  let[n,x] = input[0].trim().split(" ").map(Number);
+  let arr =input[1].trim().split(" ").map(Number);
+  
+//   console.log(n,x,arr)
+noddy(n,x,arr);
+}
+if (process.env.USERNAME === "") {
+     runProgram(``);
+ } else {
+     process.stdin.resume();
+     process.stdin.setEncoding("ascii");
+     let read = "";
+     process.stdin.on("data", function (input) {
+         read += input;
+     });
+     process.stdin.on("end", function () {
+         read = read.replace(/\n$/, "");
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+     });
+     process.on("SIGINT", function () {
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+         process.exit(0);
+     });
+ }

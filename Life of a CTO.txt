@@ -1,0 +1,39 @@
+function cto(n,arr){
+    let ans =-1;
+    for(let i=0; i<n; i++){
+        if(arr[i]==1){
+           ans = i;
+           break;
+        }
+  
+    }
+    console.log(ans)
+}      
+function runProgram(input){
+   // Write Code Here
+  input = input.trim().split("\n");
+  let n = +input[0];
+  let arr= input[1].trim().split(" ").map(Number);
+//   console.log(n,arr);
+cto(n,arr);
+}
+if (process.env.USERNAME === "") {
+     runProgram(``);
+ } else {
+     process.stdin.resume();
+     process.stdin.setEncoding("ascii");
+     let read = "";
+     process.stdin.on("data", function (input) {
+         read += input;
+     });
+     process.stdin.on("end", function () {
+         read = read.replace(/\n$/, "");
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+     });
+     process.on("SIGINT", function () {
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+         process.exit(0);
+     });
+ }
