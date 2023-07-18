@@ -1,0 +1,50 @@
+function runProgram(input) {
+input=input.trim().split("\n");
+    let [n,k]=input[0].split(" ").map(Number);
+    let arr=input[1].trim().split(" ").map(Number);
+    binarySearch(arr,n,k);
+}
+
+function binarySearch(arr,n,k){
+    let low=0;
+    let high=n-1;
+    let ans=-1;
+    while(low<n && high>=0){
+       let mid=low+Math.floor((high-low)/2);
+        if(arr[mid]==k){
+            ans=1;
+            break;
+        }
+        if(arr[mid]>k){
+            low=0;
+            high=mid-1;
+        }
+        if(arr[mid]<k){
+            low=mid+1;
+            high=n-1;
+        }
+    }
+    console.log(ans);
+}
+
+
+if (process.env.USER === "") {
+  runProgram(``);
+} else {
+  process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+    read += input;
+  });
+  process.stdin.on("end", function () {
+    read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}
