@@ -1,0 +1,48 @@
+function swapDiagonal(n,mat){
+ for(let i=0; i<n; i++){
+     let bag="";
+     for(let j=0; j<n; j++){
+         bag+=mat[j][i]+" ";
+     }
+     console.log(bag);
+ }   
+}
+
+function runProgram(input){
+   // Write Code Here
+  input = input.trim().split("\n");
+    let t=+input[0];
+   let line=1;
+   for(let i=0;i<t;i++){
+       let mat=[];
+       
+       let n=input[line++];
+       
+       for(let i=0;i<n;i++){
+           mat.push(input[line++].trim().split(" ").map(Number));
+       }
+       swapDiagonal(n,mat);
+       
+   }
+    
+}
+if (process.env.USERNAME === "") {
+     runProgram(``);
+ } else {
+     process.stdin.resume();
+     process.stdin.setEncoding("ascii");
+     let read = "";
+     process.stdin.on("data", function (input) {
+         read += input;
+     });
+     process.stdin.on("end", function () {
+         read = read.replace(/\n$/, "");
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+     });
+     process.on("SIGINT", function () {
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+         process.exit(0);
+     });
+ }

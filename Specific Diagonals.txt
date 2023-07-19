@@ -1,0 +1,28 @@
+function specificDiagonals(R, C, matrix, K){
+    //write code here
+    let diff;
+  let sum;
+  for(let i=0; i<R; i++){
+      for(let j=0; j<C; j++){
+          if(matrix[i][j]==K){
+              diff=i-j;
+              sum=i+j;
+              
+          }
+      }
+  }
+  let D1="";
+  let D2="";
+  for(let i=0; i<R; i++){
+      for(let j=0; j<C; j++){
+          if(i-j==diff){
+              D1=D1+matrix[i][j]+" ";
+          }
+          if(i+j==sum){
+              D2= D2+matrix[i][j]+" ";
+          }
+      }
+  }
+  console.log(D1);
+  console.log(D2);
+}
