@@ -1,0 +1,57 @@
+function runProgram(input) {
+    input=input.trim().split("\n");
+    
+    let n=+input[0];
+    
+    let arr=input[1].trim().split(" ").map(Number);
+    
+    let ans=[];
+    
+    let third=Math.floor(n/3);
+    
+    let obj={};
+    
+    for(let i=0;i<n;i++){
+        if(!obj[arr[i]]){
+            obj[arr[i]]=1;
+        }
+        else{
+            obj[arr[i]]++;
+        }
+    }
+    
+    for(let x in obj){
+        if(obj[x]>third) ans.push(x);
+    }
+    
+    ans.sort((a,b)=>{
+        return a-b;
+    });
+    
+    // console.log(obj)
+    
+    console.log(ans.join(" "));
+}
+
+
+
+if (process.env.USER === "") {
+  runProgram(``);
+} else {
+  process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+    read += input;
+  });
+  process.stdin.on("end", function () {
+    read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}
