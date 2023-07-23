@@ -1,0 +1,37 @@
+function profit(n) {
+    if (n == 0)
+        return 1;
+    else if (n < 0)
+        return 0;
+    else
+        return profit(n - 4) + profit(n - 8);
+}
+
+function runProgram(input) {
+    let newInput = input.trim().split("\n").map(Number);
+    let t = Number(newInput[0]);
+    for (let i = 1; i <= t; i++) {
+        let n = newInput[i];
+        console.log(profit(n));
+    }
+}
+if (process.env.USERNAME === "") {
+     runProgram(``);
+ } else {
+     process.stdin.resume();
+     process.stdin.setEncoding("ascii");
+     let read = "";
+     process.stdin.on("data", function (input) {
+         read += input;
+     });
+     process.stdin.on("end", function () {
+         read = read.replace(/\n$/, "");
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+     });
+     process.on("SIGINT", function () {
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+         process.exit(0);
+     });
+ }
