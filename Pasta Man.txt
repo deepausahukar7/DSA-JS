@@ -1,0 +1,59 @@
+function runProgram(input) {
+   input=input.trim().split("\n");
+   
+   let t=+input[0];
+   let line=1;
+   
+   while(t--!==0){
+       let [n,m]=input[line++].trim().split(" ").map(Number);
+       let arr1=input[line++].trim().split(" ").map(Number);
+       let arr2=input[line++].trim().split(" ").map(Number);
+       test(n,m,arr1,arr2);
+   }
+}
+
+function test(n,m,arr1,arr2){
+    let obj={};
+    for(let i=0;i<m;i++){
+        if(!obj[arr2[i]]){
+            obj[arr2[i]]=1;
+        }
+        else{
+            obj[arr2[i]]++;
+        }
+    }
+    for(let i=0;i<n;i++){
+        if(obj[arr1[i]]){
+            obj[arr1[i]]--;
+        }
+    }
+    let ans="HAPPY";
+    
+    for(let x in obj){
+        if(obj[x]>0) ans="ANGRY";
+    }
+    
+    console.log(ans);
+}
+
+
+if (process.env.USER === "") {
+  runProgram(``);
+} else {
+  process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+    read += input;
+  });
+  process.stdin.on("end", function () {
+    read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

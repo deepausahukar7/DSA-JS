@@ -1,0 +1,37 @@
+
+const LinkedListNode = class {
+    constructor(nodeData) {
+        this.data = nodeData;
+        this.next = null;
+    }
+};
+
+var addOneToLinkedList = function(head) {
+    var last = null;
+    var cur = head;
+    while(cur.next != null){
+        if(cur.data != 9){
+            last = cur;
+        }
+        cur = cur.next;
+    }
+    if(cur.data != 9){
+        cur.data++;
+        return head;
+    }
+    
+    if(last == null){
+        last = new  LinkedListNode();
+        last.data = 0;
+        last.next = head;
+        head = last;
+    }
+    last.data++;
+    last = last.next;
+    while(last != null){
+        last.data =0;
+        last = last.next;
+    }
+    return head;
+};
+

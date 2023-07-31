@@ -1,0 +1,43 @@
+function transformString(n,str){
+let bag="";
+let count=0;
+for(let i=0; i<n; i++){
+    count++;
+    if(str[i]!=str[i+1]){
+        bag+=str[i]+count;
+        count=0;
+    }
+}
+console.log(bag);
+
+}
+
+function runProgram(input){
+   // Write Code Here
+  input = input.trim().split("\n");
+  let n=+input[0];
+  let line=1;
+  let str=input[line++];
+  transformString(n,str);
+  
+}
+if (process.env.USERNAME === "") {
+     runProgram(``);
+ } else {
+     process.stdin.resume();
+     process.stdin.setEncoding("ascii");
+     let read = "";
+     process.stdin.on("data", function (input) {
+         read += input;
+     });
+     process.stdin.on("end", function () {
+         read = read.replace(/\n$/, "");
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+     });
+     process.on("SIGINT", function () {
+         read = read.replace(/\n$/, "");
+         runProgram(read);
+         process.exit(0);
+     });
+ }
