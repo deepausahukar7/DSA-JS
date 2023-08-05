@@ -1,0 +1,64 @@
+function longestKSubstr(s, k) {
+   let i = 0;
+    let j = 0;
+    let ans = -1;
+    let mp = new Map();
+ 
+    while (j < s.length) {
+        mp.set(s[j], (mp.get(s[j]) || 0) + 1);
+        while (mp.size > k) {
+            mp.set(s[i], mp.get(s[i]) - 1);
+            if (mp.get(s[i]) === 0) {
+                mp.delete(s[i]);
+            }
+            i++;
+        }
+        if (mp.size === k) {
+            ans = Math.max(ans, j - i + 1);
+        }
+        j++;
+    }
+ 
+    return ans;
+    
+  }
+ 
+
+
+function runProgram(input) {
+  // Write code here
+  var newInput = input.split('\n');
+  var t = Number(newInput[0]);
+  let line = 1;
+  
+  while(t--!==0)
+  {
+   let [n,k]= newInput[line++].trim().split(" ").map(Number);
+   
+   var data = newInput[line++].trim();
+   
+  
+   console.log(longestKSubstr(data, k));
+  } 
+}
+
+if (process.env.USER === "") {
+  runProgram(``);
+} else {
+  process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+    read += input;
+  });
+  process.stdin.on("end", function () {
+    read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}
