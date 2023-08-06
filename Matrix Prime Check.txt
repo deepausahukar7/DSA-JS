@@ -1,0 +1,31 @@
+function matrixPrimeCheck(N, M, arr) {
+  //write code here
+     let count=0;
+    for(let i=0; i<N; i++){
+        for(let j=0; j<M; j++){
+            if(prime(arr[i][j])==true){
+                count++;
+               
+            }
+        }
+    }
+    console.log(count);
+}
+
+function prime(num){
+    let x=0;
+    if(num==1){
+        return false;
+    }
+    for(let i=2; i<=num**0.5;i++){
+        if(num%i==0){
+            x++;
+        }
+    }
+    if(x==0){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
